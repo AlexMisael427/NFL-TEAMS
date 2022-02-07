@@ -1,0 +1,31 @@
+<form name="editForm" role="form"  novalidate  #editForm="ngForm">
+    <p-dropdown id="local" name="local" [options]="locals" [(ngModel)]="newGame.local" [showClear]="true"
+        optionLabel="name" placeholder="Select a local team" (onChange)="onSelectLocal()" [required]="true">
+
+        <ng-template let-team pTemplate="item">
+            <div class="team-item">
+                <img src="{{team.url}}" style="width: 15%;" />
+                <div>{{team.name}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    <hr>
+    <p-dropdown id="visit" name="visit" [options]="visitors" [(ngModel)]="newGame.visitant" [showClear]="true"
+        optionLabel="name" placeholder="Select a visitor team" [required]="true">
+        <ng-template let-team pTemplate="item">
+            <div class="team-item">
+                <img src="{{team.url}}" style="width: 15%;" />
+                <div>{{team.name}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    <hr>
+    <label for="date">Select a Date for the game</label>
+    <br>
+    <p-calendar name="date" [(ngModel)]="newGame.date" [required]="true"></p-calendar>
+
+    <hr>
+    <p-button icon="pi pi-check" (click)="save()" label="Save" styleClass="p-button-text"
+    [disabled]="editForm.form.invalid"></p-button>
+
+</form>

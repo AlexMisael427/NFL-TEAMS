@@ -1,0 +1,72 @@
+<br>
+<h2 *ngIf="!team._id">Add a New Team</h2>
+<h2 *ngIf="team._id">Edit Team</h2>
+<br>
+<div class="contenedor form-group">
+    <form name="editForm" role="form"  novalidate  #editForm="ngForm"(ngSubmit)="openConfirmation()">
+        <div class="form-group ">
+            <label for="teamName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="teamName" name="teamName" placeholder="Name of the New Team"
+             #teamName="ngModel" [(ngModel)]="team.name" required>
+            <div *ngIf="editForm.controls['teamName']?.touched || editForm.controls['teamName']?.dirty" >
+              <small  *ngIf="!team.name" class="form-text text-danger">
+                You must give the name of the new Team
+            </small>
+            </div>
+        </div>
+        <div class="form-group ">
+          <label for="teamState" class="form-label">State</label>
+          <input type="text" class="form-control" id="teamState" name="teamState" placeholder="State"
+            [(ngModel)]="team.state" required>
+          <div *ngIf="editForm.controls['teamState']?.touched || editForm.controls['teamState']?.dirty">
+            <small *ngIf="!team.state" class="form-text text-danger">
+              You must give the state of the new team
+            </small>
+          </div>
+        </div>
+        <div class="form-group ">
+            <label for="teamYear" class="form-label">Year</label>
+            <input type="date" class="form-control" id="teamYear" name="teamYear" placeholder="Year"
+              [(ngModel)]="year" required>
+            <div *ngIf="editForm.controls['teamYear']?.touched || editForm.controls['teamYear']?.dirty">
+              <small *ngIf="!team.state" class="form-text text-danger">
+                You must give the Foundation year of the new team
+              </small>
+            </div>
+          </div>
+        <div class="form-group ">
+            <label for="teamImage" class="form-label">Image</label>
+            <input type="text" class="form-control" id="teamImage" name="teamImage" placeholder="URL Image"
+                [(ngModel)]="team.url" required>
+            <div *ngIf="editForm.controls['teamImage']?.touched || editForm.controls['teamImage']?.dirty ">
+              <small *ngIf="!team.url" class="form-text text-danger">
+                The new team need a image
+              </small>
+            </div>
+        </div>
+
+        <button #saveButton type="submit" class="btn btn-success" [disabled]="editForm.form.invalid || !validacion">Save</button>
+    </form>
+</div>
+<br>
+
+<p-confirmDialog icon="pi pi-exclamation-triangle" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+ [style]="{width: '50vw'}" [closable]="true">
+  <ng-template pTemplate="header">
+    <h3>Avisot</h3>
+</ng-template>
+<ng-template pTemplate="footer">
+    <button type="button" pButton icon="pi pi-times" label="No" (click)="reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Yes" (click)="save()"></button>
+</ng-template>
+</p-confirmDialog>
+
+
+<p-dialog header="Message" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="true">
+<p class="p-m-0"> The Team was added successfully </p>
+   <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="onSuccess()" label="Ok" styleClass="p-button-text"></p-button>
+   </ng-template>
+</p-dialog>
+

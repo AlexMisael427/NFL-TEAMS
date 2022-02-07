@@ -1,0 +1,14 @@
+<h2>Next Games</h2>
+<div *ngFor="let game of games" class="concentrado">
+    <p-card header="{{game.local?.name}} vs {{game.visitant?.name}}" subheader="{{game.date | date: 'dd/MM/yyyy'}} "styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+            <img alt={{game.local?.name}} src={{game.local?.url}} style="width: 50%;display: inline;">
+            <img alt={{game.visitant?.name}} src={{game.visitant?.url}} style="width: 50%;display: inline;">
+
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <!-- <p-button label="View Details" (click)="showModalDialog(game)" icon="pi pi-eye"></p-button> -->
+        </ng-template>
+    </p-card>
+</div>
